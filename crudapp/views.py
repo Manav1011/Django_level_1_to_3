@@ -1,7 +1,6 @@
-from multiprocessing import context
-from django.shortcuts import render
-from django.http import HttpResponse
-from .forms import basic_form,model_form
+from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
+from .forms import basic_form,model_form,update
 from  . models import info
 
 # Create your views here.
@@ -54,6 +53,46 @@ def model_forms(request):
         modelform=model_form(request.POST)
         if modelform.is_valid():
             modelform.save(commit=True)
+            return redirect('crud')
     
     return render(request, 'model_form.html',context=context_dir)
     
+    
+def crud(request):
+    context_dir={
+        'info':info.objects.values()
+    }
+    return render(request, 'crud.html',context=context_dir)
+
+
+def delete(request):
+    id=request.GET.get('id')
+    a=info.objects.get(id=id)
+    a.delete()
+    
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def update1(request):
+    o=info.objects.get(id=request.GET.get('id'))
+    updateform=update()
+    context_dir={'form':updateform}
+    if request.method == 'POST':
+        updateform=update(request.POST)
+        
+        if updateform.is_valid():
+            data=updateform.cleaned_data
+            
+            if len(data['name'])>0:
+                o.name=data['name']
+                o.save()
+    
+            if len(str(data['age']))>0:
+                o.age=data['age']
+                o.save()
+                
+            if len(data['gender'])>0:
+                o.gender=data['gender']
+                o.save()
+        return redirect('crud')
+    
+    return render(request, 'update.html',context=context_dir)

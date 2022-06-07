@@ -9,8 +9,14 @@ class basic_form(forms.Form):
     
 class model_form(forms.ModelForm):
     class Meta:
+        global CHOICES
         model=info
         fields='__all__'
         CHOICES = [('M','Male'),('F','Female')]
         widgets={'age':forms.NumberInput(),'gender':forms.RadioSelect(choices=CHOICES),'name':forms.TimeInput()}
         
+
+class update(forms.Form):
+    name = forms.CharField(max_length=255,required=False)
+    age = forms.IntegerField(required=False)
+    gender=forms.ChoiceField(choices=CHOICES,required=False)

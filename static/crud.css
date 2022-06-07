@@ -1,0 +1,18 @@
+body{
+    background-color:gold;
+}
+h1{
+    text-align:center;
+    color:black;
+
+}
+.ta,th{
+    background-color:white;
+    color:black;
+    width:50%;
+    height:50%;
+    font-size:5vh;
+    margin: auto;
+    border:1px solid black;
+    
+}
