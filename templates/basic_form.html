@@ -12,16 +12,25 @@
     <h1>{{page}}</h1>
     <h1>{{request}}</h1>
     <table>
-        {%for i in name%}
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+        {%for i in form1%}
         <tr>
             <h1>
                
-                <td> {{i.name}}           </td>
+                <td> {{i.name}}</td>
+                <td> {{i.age}}</td>
+                <td> {{i.gender}}</td>
         
             </h1>
         </tr>
         {%endfor%}
-    </table>
+        </table>
     <div class="container" id="form_class">
     <form action="" method="post">
    <div>{{form.as_p}}</div>

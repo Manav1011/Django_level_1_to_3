@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import name,age,gender
+from .models import info
 
 # Register your models here.
-admin.site.register(name)
-admin.site.register(age)
-admin.site.register(gender)
+admin.site.register(info)

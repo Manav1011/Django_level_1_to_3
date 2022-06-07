@@ -1,8 +1,8 @@
 from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import basic_form
-from  . models import name
+from .forms import basic_form,model_form
+from  . models import info
 
 # Create your views here.
 
@@ -10,7 +10,7 @@ def index(request):
     context_dir={
         'request':request,
         'page':'This is the index page',
-        'name':name.objects.raw('select * from crudapp_name')
+        'form':info.objects.all(),
     }
     return render(request, 'index.html', context=context_dir)
     
@@ -20,7 +20,7 @@ def basic_forms(request):
         'form':form,
         'request':request,
         'page':'This is the form page',
-        'name':name.objects.raw('select * from crudapp_name')
+        'form1':info.objects.all(),
     }
     if request.method == 'POST':
         #Simple html form
@@ -40,4 +40,20 @@ def basic_forms(request):
             print("Form is not valid")
     return render(request, 'basic_form.html', context=context_dir)
 
+
+def model_forms(request):
+    modelform=model_form()
+    
+    context_dir={
+        'modelform':modelform,
+        'form':info.objects.all(),
+        'request':request,
+        'page':'This is the model_form page',
+    }
+    if request.method == 'POST':
+        modelform=model_form(request.POST)
+        if modelform.is_valid():
+            modelform.save(commit=True)
+    
+    return render(request, 'model_form.html',context=context_dir)
     
