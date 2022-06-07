@@ -10,5 +10,17 @@
 </head>
 <body>
     <h1>{{page}}</h1>
+    <h1>{{request}}</h1>
+    <table>
+        {%for i in name%}
+        <tr>
+            <h1>
+               
+                <td> {{i.name}}           </td>
+        
+            </h1>
+        </tr>
+        {%endfor%}
+        </table>
 </body>
 </html>

@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,re_path,include
+from crudapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'crudapp/',include('crudapp.urls'))
+    re_path(r'crudapp/',include('crudapp.urls')),
 ]
