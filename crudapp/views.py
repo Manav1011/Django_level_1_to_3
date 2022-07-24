@@ -93,6 +93,6 @@ def update1(request):
             if len(data['gender'])>0:
                 o.gender=data['gender']
                 o.save()
-        return redirect('crud')
+        return HttpResponseRedirect('crud')
     
     return render(request, 'update.html',context=context_dir)

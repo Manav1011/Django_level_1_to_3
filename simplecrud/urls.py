@@ -17,7 +17,16 @@ from django.contrib import admin
 from django.urls import path,re_path,include
 from crudapp import views
 
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'crudapp/',include('crudapp.urls')),
+    re_path(r'',include('crudapp.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns=[
+        re_path(r'^__debug__/',include(debug_toolbar.urls))
+    ]+urlpatterns
+    
